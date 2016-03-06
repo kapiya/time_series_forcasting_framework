@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -24,76 +22,21 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
-import com.edu.jnu.atm.core.DPPredition;
-import com.edu.jnu.atm.strategy.BP;
-import com.edu.jnu.atm.strategy.BPStrategy;
-
-
-public class Window
-{	
-	protected int NumberOfPredictingDate = 0,
-			      SvmTrainingDate = 5,
-	              SvmInputDate = 7;
-	protected int TYPE = 1;
-	         double err = 0.3;
+public class ResultGraph {
 	
-	protected void forcast(String DEV_CODE, String TRNS_DATE)
-	{ 
-		double[] PredictingResult = new double[2];
-		List<Double> sourceList = new ArrayList<Double>(); 
-		List<Double> predictList = new ArrayList<Double>(); 
-		Calendar TRNSDATE = toCalendar(TRNS_DATE);
-   		DPPredition dp = new DPPredition(); 
-   		BPStrategy bp =new BPStrategy();
-		BP model =bp.bptrain(DEV_CODE, TYPE);
-        for (int i = 0; i < NumberOfPredictingDate; i++) 
-        {
-        	PredictingResult = dp.predict (model, DEV_CODE, TRNSDATE, TYPE, SvmTrainingDate, SvmInputDate);
-            sourceList.add(PredictingResult[0]);
-            predictList.add(PredictingResult[1]);
-            TRNSDATE.add(Calendar.DATE,1);	
-        }
-        showResult(sourceList, predictList, err);	
-	 }
-            
-	private Calendar toCalendar (String date)
-	{
-		/**
-		 * translate String date into a Calendar object 
-		 */
-		int year = Integer.parseInt(date.substring(0, 4).trim());
-		int month = Integer.parseInt(date.substring(4, 6).trim());
-		int day = Integer.parseInt(date.substring(6, 8).trim());		
-		Calendar DATE = Calendar.getInstance();
-		DATE.set(year, month-1, day);
-		return DATE;		
-	}
-	
-	private void showResult(List<Double> sourceList, List<Double> predictList, double ER)
+	private void showResult(List<Double> sourceList, List<Double> predictList, double RATE)
 	{
 		/**
 		 * construct a new window to show the variation of sourceList and predictList
-		 * ER denotes error ratio
+		 * RATE denotes error ratio
 		 */
 		JFrame frame = new JFrame();
 		int width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int height = Toolkit.getDefaultToolkit().getScreenSize().height; 
 	    frame.setBounds((width - 800) / 2, (height - 600) / 2, 800, 500);
 		JPanel panel = new JPanel();
-		JTextField text = new JTextField();	
-		int n = 0;
-		
-		for (int i = 0; i < sourceList.size(); i ++)           
-		{
-			if ( (predictList.get(i) + ER * sourceList.get(i) - sourceList.get(i)) > 0 )
-		//	if ( (predictList.get(i) + ER * Math.abs(predictList.get(i)) - sourceList.get(i)) > 0 ) 
-			{
-				n ++;
-			}
-		}
-		double rate = n / (double)sourceList.size();	
-		String r = String.valueOf(rate);
-	    String err = String.valueOf(ER);
+		JTextField text = new JTextField();			
+		String r = String.valueOf(RATE);
 	    text.setEditable(false);
 	    text.setFont(new Font("宋体", Font.BOLD, 20));
 		text.setText(  "预测准确度为：" + r );	

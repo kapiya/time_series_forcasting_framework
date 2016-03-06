@@ -11,7 +11,7 @@ import com.edu.jnu.atm.strategy.SVMStrategy;
 import com.edu.jnu.atm.strategy.SvmModel;
 import com.edu.jnu.atm.util.DBConnection;
 
-public class DPPredition 
+public class SingleDatePforecast 
 {
 	public double[] predict (BP model, String DEV_CODE, Calendar TRNS_DATE, int TYPE, int SvmTrainingDate, int SvmInputDate)
 	{
