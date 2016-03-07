@@ -1,4 +1,4 @@
-package com.edu.jnu.atm.core;
+package com.edu.jnu.atm.io;
 
 import java.awt.List;
 import java.util.ArrayList;
