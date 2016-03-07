@@ -10,9 +10,9 @@ import java.util.List;
 
 import com.edu.jnu.atm.util.DBConnection;
 
-public class SVMStrategy
+public class SVMStrategy extends Strategy
 {	
-	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE, int SvmTrainingDate, int SvmInputDate, int TYPE)
+	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE)
 	{
 		/**
 		 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
@@ -78,7 +78,7 @@ public class SVMStrategy
         return model;
 	}
 	
-	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE, int SvmTrainingDate, int TYPE)
+	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE)
 	{
 		/**
 		 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
@@ -144,7 +144,7 @@ public class SVMStrategy
         return model;
 	}
 	
-	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE, int SvmInputDate, int TYPE)
+	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE)
 	{
         /**
          * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
@@ -173,7 +173,7 @@ public class SVMStrategy
         return predictValue;
     }	
 	
-	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE, int TYPE)
+	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE)
 	{
         /**
          * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
@@ -200,5 +200,13 @@ public class SVMStrategy
         double lable = nodes.get(nodes.size() - 1);   	       	 
         double predictValue = Svm.svm_predict(model, vector);
         return predictValue;
-    }	
+    }
+
+	@Override
+	public double Algorithm(String DEV_CODE, Calendar TRNS_DATE) {
+		SVMStrategy ss = new SVMStrategy();
+		SvmModel sm = ss.svmtrain(DEV_CODE, TRNS_DATE);
+		double ForecastResult = ss.svmpredict(sm, DEV_CODE, TRNS_DATE);
+		return 0;
+	}	
 }

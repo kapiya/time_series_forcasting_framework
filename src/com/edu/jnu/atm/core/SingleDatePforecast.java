@@ -16,7 +16,7 @@ public class SingleDatePforecast
 	public double[] predict (BP model, String DEV_CODE, Calendar TRNS_DATE, int TYPE, int SvmTrainingDate, int SvmInputDate)
 	{
 		double AdjcentValue = 0;
-		DateProfile dp = new DateProfile();						
+		SourceDataPool dp = new SourceDataPool();						
 		double[] PredictingResult = {0,0};
 		DBConnection node = new DBConnection();
 		double[] nodes = node.getNode(DEV_CODE, TRNS_DATE);
