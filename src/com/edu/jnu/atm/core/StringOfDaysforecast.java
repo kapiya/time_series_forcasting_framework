@@ -25,8 +25,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
 import com.edu.jnu.atm.core.SingleDatePforecast;
-import com.edu.jnu.atm.strategy.BP;
-import com.edu.jnu.atm.strategy.BPStrategy;
+import com.edu.jnu.atm.core.strategy.BP;
+import com.edu.jnu.atm.core.strategy.BPStrategy;
 import com.edu.jnu.atm.util.StringToCalendar;
 
 public class StringOfDaysforecast

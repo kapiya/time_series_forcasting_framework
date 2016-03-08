@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.edu.jnu.atm.strategy.BP;
-import com.edu.jnu.atm.strategy.BPStrategy;
-import com.edu.jnu.atm.strategy.SVMStrategy;
-import com.edu.jnu.atm.strategy.SvmModel;
+import com.edu.jnu.atm.core.strategy.BP;
+import com.edu.jnu.atm.core.strategy.BPStrategy;
+import com.edu.jnu.atm.core.strategy.SVMStrategy;
+import com.edu.jnu.atm.core.strategy.SvmModel;
 import com.edu.jnu.atm.util.DBConnection;
 
 public class SingleDatePforecast 
