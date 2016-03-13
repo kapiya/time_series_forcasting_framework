@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ErrorEvaluation {
 	
+	
 	public double computeError (List<Double> sourceList, List<Double> predictList) {
 		
 		double ER = 0.3;
@@ -19,5 +20,8 @@ public class ErrorEvaluation {
     	
     	double rate = n / (double)sourceList.size();
     	return rate;
+    	
 	}
+	
+	
 }

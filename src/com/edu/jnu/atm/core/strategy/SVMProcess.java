@@ -1,23 +1,17 @@
 package com.edu.jnu.atm.core.strategy;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.edu.jnu.atm.util.DBConnection;
+public class SVMProcess {
 
-public class SVMStrategy extends Strategy
-{	
-	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE)
-	{
-		/**
-		 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
-		 * a model is trained as the output   
-		 */
+	/**
+	 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
+	 * a model is trained as the output   
+	 */
+	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE) {
+		
 		String trnsdate = new String();
 		double[] n = new double[3];
 		List<Double> nodes = new ArrayList<Double>();
@@ -25,7 +19,6 @@ public class SVMStrategy extends Strategy
         List<SvmNode[]> nodeSet = new ArrayList<SvmNode[]>();
         List<Double> label = new ArrayList<Double>();
         
-
         for (int i = 0; i < SvmTrainingDate; i++) 
         {
         	TRNS_DATE.add(Calendar.DATE, -(SvmInputDate+1));
@@ -76,14 +69,15 @@ public class SVMStrategy extends Strategy
         param.C = 1.9;
         SvmModel model = Svm.svm_train(problem, param);
         return model;
+        
 	}
 	
-	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE)
-	{
-		/**
-		 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
-		 * a model is trained as the output   
-		 */
+	/**
+	 * dateNumber is the number of training days, TYPE = 0 means DEPOSIT, TYPE = 1 means WITHDRAW, TYPE = 2 means NETVALUE
+	 * a model is trained as the output   
+	 */
+	public SvmModel svmtrain(String DEV_CODE, Calendar TRNS_DATE) {
+		
 		String trnsdate = new String();
 		double[] n = new double[3];
 		List<Double> nodes = new ArrayList<Double>();
@@ -142,14 +136,15 @@ public class SVMStrategy extends Strategy
         param.C = 1.9;
         SvmModel model = Svm.svm_train(problem, param);
         return model;
+        
 	}
 	
-	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE)
-	{
-        /**
-         * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
-         * return the true value and the predict result
-         */
+	/**
+     * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
+     * return the true value and the predict result
+     */
+	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE) {
+        
 		List<Double> nodes = new ArrayList<Double>();
 		double[] n = new double[3];
 		DBConnection nodeList = new DBConnection();      
@@ -171,14 +166,15 @@ public class SVMStrategy extends Strategy
         double lable = nodes.get(nodes.size() - 1);   	       	 
         double predictValue = Svm.svm_predict(model, vector);
         return predictValue;
+        
     }	
 	
-	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE)
-	{
-        /**
-         * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
-         * return the true value and the predict result
-         */
+	/**
+     * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
+     * return the true value and the predict result
+     */
+	public double svmpredict(SvmModel model, String DEV_CODE, Calendar TRNS_DATE) {
+        
 		List<Double> nodes = new ArrayList<Double>();
 		double[] n = new double[3];
 		DBConnection nodeList = new DBConnection();      
@@ -200,13 +196,8 @@ public class SVMStrategy extends Strategy
         double lable = nodes.get(nodes.size() - 1);   	       	 
         double predictValue = Svm.svm_predict(model, vector);
         return predictValue;
+        
     }
-
-	@Override
-	public double Algorithm(String DEV_CODE, Calendar TRNS_DATE) {
-		SVMStrategy ss = new SVMStrategy();
-		SvmModel sm = ss.svmtrain(DEV_CODE, TRNS_DATE);
-		double ForecastResult = ss.svmpredict(sm, DEV_CODE, TRNS_DATE);
-		return 0;
-	}	
+	
+	
 }

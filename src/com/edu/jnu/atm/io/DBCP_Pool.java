@@ -11,50 +11,54 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public class DBCP_Pool {
-
-    private static DataSource ds = null;
+    
+	
+	private static DataSource ds = null;
    
-    static{
-        try{
+    static {
+        try {
             InputStream in = DBCP_Pool.class.getClassLoader().getResourceAsStream("dbcpconfig.properties");
             Properties prop = new Properties();
             prop.load(in);
             ds = BasicDataSourceFactory.createDataSource(prop);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new ExceptionInInitializerError(e);
         }
     }
     
-    public static Connection getConnection() throws SQLException{
+    public static Connection getConnection() throws SQLException {
 
     	return ds.getConnection();
     	
     }
     
-
-    public static void release(Connection conn,Statement st,ResultSet rs){
-        if(rs!=null){
+    public static void release (Connection conn,Statement st,ResultSet rs) {
+        
+    	if (rs!=null) {
             try{
                 rs.close();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             rs = null;
-        }
-        if(st!=null){
-            try{
+        }     
+    	if (st!=null) {
+            try {
                 st.close();
-            }catch (Exception e) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }      
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         
-        if(conn!=null){
-            try{
-                conn.close();
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        
     }
+    
+    
 }
