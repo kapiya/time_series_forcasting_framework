@@ -1,10 +1,7 @@
 package com.edu.jnu.atm.io;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 public class SourceDataPool implements java.io.Serializable {	
 	

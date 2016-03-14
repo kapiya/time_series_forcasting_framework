@@ -1,7 +1,6 @@
 
 package com.edu.jnu.atm.core;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public abstract class Strategy {

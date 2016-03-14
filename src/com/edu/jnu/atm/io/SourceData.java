@@ -1,7 +1,6 @@
 package com.edu.jnu.atm.io;
 
 import java.util.Calendar;
-import java.util.HashMap;
 
 public class SourceData {
 	

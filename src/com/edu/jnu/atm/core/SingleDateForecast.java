@@ -1,11 +1,6 @@
 package com.edu.jnu.atm.core;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
-import com.edu.jnu.atm.core.strategy.BP;
 
 public class SingleDateForecast {
 	

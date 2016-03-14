@@ -1,12 +1,6 @@
 package com.edu.jnu.atm.core;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import com.edu.jnu.atm.core.strategy.SVMProcess;
 import com.edu.jnu.atm.core.strategy.SvmModel;
@@ -31,5 +25,7 @@ public class SVMStrategy extends Strategy {
 	
 		return predictresult;
 		
-	}	
+	}
+
+	
 }

@@ -1,14 +1,10 @@
 package com.edu.jnu.atm.io;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import com.mysql.jdbc.Statement;
 
 public class MySQLData extends SourceData {
 	
