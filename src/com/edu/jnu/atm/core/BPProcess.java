@@ -1,6 +1,8 @@
-package com.edu.jnu.atm.core.strategy;
+package com.edu.jnu.atm.core;
 
 import java.util.Calendar;
+
+import com.edu.jnu.atm.core.strategy.BP;
 
 public class BPProcess {
 	

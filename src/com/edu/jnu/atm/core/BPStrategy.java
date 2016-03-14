@@ -2,7 +2,6 @@ package com.edu.jnu.atm.core;
 
 import java.util.Calendar;
 import com.edu.jnu.atm.core.strategy.BP;
-import com.edu.jnu.atm.core.strategy.BPProcess;
 
 public class BPStrategy extends Strategy {
 	

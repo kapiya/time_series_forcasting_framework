@@ -1,8 +1,10 @@
-package com.edu.jnu.atm.core.strategy;
+package com.edu.jnu.atm.core;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import com.edu.jnu.atm.core.strategy.SvmModel;
 
 public class SVMProcess {
 

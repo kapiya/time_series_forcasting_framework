@@ -2,7 +2,6 @@ package com.edu.jnu.atm.core;
 
 import java.util.Calendar;
 
-import com.edu.jnu.atm.core.strategy.SVMProcess;
 import com.edu.jnu.atm.core.strategy.SvmModel;
 
 public class SVMStrategy extends Strategy {	

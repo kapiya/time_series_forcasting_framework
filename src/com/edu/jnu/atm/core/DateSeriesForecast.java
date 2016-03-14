@@ -25,6 +25,7 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
+import com.edu.jnu.atm.core.strategy.BP;
 import com.edu.jnu.atm.util.StringToCalendar;
 
 public class DateSeriesForecast {	
@@ -42,8 +43,8 @@ public class DateSeriesForecast {
 		List<Double> sourceList = new ArrayList<Double>(); 
 		List<Double> predictList = new ArrayList<Double>(); 
 		StringToCalendar stc = new StringToCalendar();
-		Calendar TRNSDATE = stc.toCalendar(TRNS_DATE);
-   		SingleDatePforecast dp = new SingleDatePforecast(); 
+		Calendar TRNSDATE = stc.ToCalendar(TRNS_DATE);
+   		SingleDateForecast dp = new SingleDateForecast(); 
    		BPStrategy bp =new BPStrategy();
 		BP model =bp.bptrain(DEV_CODE, TYPE);
 		
