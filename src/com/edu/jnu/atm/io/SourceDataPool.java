@@ -1,39 +1,39 @@
 package com.edu.jnu.atm.io;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import com.edu.jnu.atm.util.DateProfile;
+/**
+ * 从数据库中取出历史数据组成一个按日期索引的HashMap.
+ * @author Teacher Lee
+ *
+ */
 public class SourceDataPool implements java.io.Serializable {	
-	
-	
-	public HashMap<Calendar,Double> SourceDataPool (String DEV_CODE, Calendar TRNS_DATE, int HistoryDays) {
-	
-		
+	private static final long serialVersionUID = 1L;
+
+	public ArrayList<DateProfile> getSourceDataPool (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS) {	
 		double value = 0;
-		HashMap<Calendar, Double> hashmap = new HashMap<Calendar, Double>();
+		ArrayList<DateProfile> sourcedata = new ArrayList<>();
 		
-		for (int i = 0; i < HistoryDays; i++) {
-           
+		for (int i = 0; i < HISTORY_DAYS; i++) {           
 			TRNS_DATE.add(Calendar.DATE,-1);	
 			SourceData dbcon;
 			
-			/*
-			 * select the Database: MySQL or Oracle 
-			 */
-			DataFactory datafactory = new MySQLFactory();
-		//	DataFactory datafactory = new OracleFactory();
+			//select the Database: MySQL or Oracle 	 
+			DBFactory datafactory = new MySQLFactory();
+		    //DBFactory datafactory = new OracleFactory();
 
 			dbcon = datafactory.getDBConnection();
 			value = dbcon.getSourceData(DEV_CODE, TRNS_DATE);
-		
-			hashmap.put(TRNS_DATE, value);
+			DateProfile df = new DateProfile();
+			df.DATE = TRNS_DATE;
+			df.value = value;
+			sourcedata.add(df);
 
-		}
-		
-		return hashmap;		
-		
-		
+		}	
+		return sourcedata;				
 	}
-	
-	
+		
 }

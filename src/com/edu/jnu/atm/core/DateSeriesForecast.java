@@ -26,10 +26,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
 import com.edu.jnu.atm.core.strategy.BP;
+import com.edu.jnu.atm.util.DateProfile;
 import com.edu.jnu.atm.util.StringToCalendar;
 
 public class DateSeriesForecast {	
-	
 	
 	protected int NumberOfPredictingDate = 0,
 			      SvmTrainingDate = 5,
@@ -58,7 +58,7 @@ public class DateSeriesForecast {
         return predictList;	
 	 }
 
-	public double[][] forecast(HashMap<Calendar, Double> sourcedata, String tRNS_DATE, int dates_of_predict) {
+	public double[][] forecast(ArrayList<DateProfile> sourcedata, String tRNS_DATE, int dates_of_predict) {
 		// TODO Auto-generated method stub
 		return null;
 	}

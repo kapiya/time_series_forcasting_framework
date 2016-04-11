@@ -1,12 +1,15 @@
 
 package com.edu.jnu.atm.core;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 
+import com.edu.jnu.atm.util.DateProfile;
+
+/**
+ * ³éÏó²ßÂÔÀà
+ * @author Teacher Lee
+ *
+ */
 public abstract class Strategy {
-	
-	
-	public abstract double Algorithm(String DEV_CODE, Calendar TRNS_DATE);
-	
-	
+	public abstract double Algorithm(ArrayList<DateProfile> sourcedata);
 }

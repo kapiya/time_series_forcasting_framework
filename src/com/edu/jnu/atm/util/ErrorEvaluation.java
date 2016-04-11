@@ -1,12 +1,14 @@
 package com.edu.jnu.atm.util;
 
 import java.util.List;
-
-public class ErrorEvaluation {
+/**
+ * ŒÛ≤Ó∆¿π¿
+ * @author Teacher Lee
+ *
+ */
+public class ErrorEvaluation {	
 	
-	
-	public double computeError (List<Double> sourceList, List<Double> predictList) {
-		
+	public double computeError (List<Double> sourceList, List<Double> predictList) {	
 		double ER = 0.3;
 		int n = 0; 	
 		
@@ -19,9 +21,6 @@ public class ErrorEvaluation {
     	}
     	
     	double rate = n / (double)sourceList.size();
-    	return rate;
-    	
-	}
-	
-	
+    	return rate;   	
+	}	
 }

@@ -1,8 +1,9 @@
 package com.edu.jnu.atm.io;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,27 +22,42 @@ public class MySQLData extends SourceData {
 		String TRNS_DATE = dateformat.format(TRANS_DATE.getTime());
 		
 		Connection con = null;
-        PreparedStatement ps = null;
-		ResultSet result = null;
+        ResultSet result = null;
 		String sql = "SELECT WITHDRAW FROM guangfa WHERE TRNS_DATE = " + TRNS_DATE;
+		Statement pre = null;
 		try 
 		{
-            con = DBCP_Pool.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-            result = ps.getGeneratedKeys();
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/ATM?autoReconnect=true&useSSL=false";
+			String user = "root";
+			String password = "administrator";
+			con = DriverManager.getConnection(url,user,password);
+			pre = con.createStatement();
+			result = pre.executeQuery(sql);
 			while (result.next()) { 
 				SqlResult = result.getDouble(1);
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
-			System.out.println ("Error while interact with Database!");
+			System.out.println("Error while interact with Database!");
+		}
+		finally 
+		{
+			try 
+			{
+				if (result != null)
+					result.close();
+				if (pre != null)
+					pre.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}		
-		finally {
-			DBCP_Pool.release (con, ps, result);
-		}	
-		
-		return SqlResult;
+		return SqlResult;	
 	}
 	
 	

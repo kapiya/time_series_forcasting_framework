@@ -1,19 +1,26 @@
 package com.edu.jnu.atm.core;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
-public class ForecastContext {
-	
-	
+import com.edu.jnu.atm.util.DateProfile;
+
+/**
+ * ²ßÂÔÑ¡ÔñContext
+ * @author Teacher Lee
+ *
+ */
+public class ForecastContext {	
 	private Strategy stg;
 	public ForecastContext (Strategy stg)
 	{
 		this.stg =stg;
 	}
 	
-	public double forcast (String DEV_CODE, Calendar TRNS_DATE)
+	public double forcast (ArrayList<DateProfile> sourcedata)
 	{
-		double predictingresult = stg.Algorithm(DEV_CODE, TRNS_DATE);
+		double predictingresult = stg.Algorithm(sourcedata);
 		return predictingresult;
 	}
 	
