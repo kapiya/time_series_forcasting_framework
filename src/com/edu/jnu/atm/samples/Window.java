@@ -24,8 +24,10 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
+import com.edu.jnu.atm.io.ResultDataPool;
 import com.edu.jnu.atm.io.SourceDataPool;
-import com.edu.jnu.atm.util.StringToCalendar;
+import com.edu.jnu.atm.util.ErrorEvaluationUtil;
+import com.edu.jnu.atm.util.StringToCalendarUtil;
 
 public class Window {
 	
@@ -34,8 +36,9 @@ public class Window {
 	 * construct a new window to show the variation of sourcedata and predictdata
 	 * RATE denotes error ratio
 	 */
-	public void show (double[][] result) {
-		
+	public void show (ResultDataPool RDP) {
+		double RATE;//预测误差率		
+		RATE = ErrorEvaluationUtil.computeError(RDP.sourceList, RDP.predictList);
 		JFrame frame = new JFrame();
 		int width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int height = Toolkit.getDefaultToolkit().getScreenSize().height; 
@@ -47,7 +50,7 @@ public class Window {
 	    text.setFont(new Font("宋体", Font.BOLD, 20));
 		text.setText(  "预测准确度为：" + r );	
 		panel.add(text);
-		ChartPanel tsc = LineChart(sourceList, predictList);
+		ChartPanel tsc = LineChart(RDP.sourceList, RDP.predictList);
 		frame.add(tsc, BorderLayout.CENTER );
 		frame.add(panel, BorderLayout.SOUTH);   
 		frame.setVisible(true);

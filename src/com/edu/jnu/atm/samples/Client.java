@@ -9,18 +9,17 @@ import java.util.HashMap;
 
 import com.edu.jnu.atm.core.DateSeriesForecast;
 import com.edu.jnu.atm.core.SingleDateForecast;
+import com.edu.jnu.atm.io.ResultDataPool;
 import com.edu.jnu.atm.io.SourceDataPool;
-import com.edu.jnu.atm.util.DateProfile;
-import com.edu.jnu.atm.util.StringToCalendar;
+import com.edu.jnu.atm.util.DateProfileUtil;
+import com.edu.jnu.atm.util.StringToCalendarUtil;
 
 public class Client {
 	
 	public static void main (String args[]) {			
 		String DEV_CODE = ""; //设备号
 		String TRNS_DATE = "";//预测起始日期(待预测日期的前一天)
-		int dates_of_predict = 0;//预测天数
-		final int HISTORY_DAYS  = 30;//过去的历史数据
-		double result ;//结果存放
+		int dates_of_predict = 400;//预测天数
 		
 		try{		
 			System.out.println("Please input the DEV_CODE :");
@@ -34,16 +33,16 @@ public class Client {
 		}
 		
 		//转化为日期类
-		StringToCalendar stc = new StringToCalendar();
+		StringToCalendarUtil stc = new StringToCalendarUtil();
 		Calendar TRANS_DATE = stc.ToCalendar(TRNS_DATE);
+			
+		//预测
+		DateSeriesForecast DSF = new DateSeriesForecast();
+	    ResultDataPool RDP = DSF.seriesForest(DEV_CODE, TRANS_DATE, dates_of_predict);
 		
-	
-		//单个日期预测
-		SingleDateForecast dateseries = new SingleDateForecast();
-	    result = dateseries.forecast(DEV_CODE, TRANS_DATE, 30);
-		
+	    //结果输出
 		Window wnd = new Window();
-	 //  wnd.show(result);	    
+	    wnd.show(RDP);	    
 	    
 	}
 	

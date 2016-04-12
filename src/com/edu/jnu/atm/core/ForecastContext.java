@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import com.edu.jnu.atm.util.DateProfile;
+import com.edu.jnu.atm.util.DateProfileUtil;
 
 /**
  * ²ßÂÔÑ¡ÔñContext
@@ -18,7 +18,7 @@ public class ForecastContext {
 		this.stg =stg;
 	}
 	
-	public double forcast (ArrayList<DateProfile> sourcedata)
+	public double forcast (ArrayList<DateProfileUtil> sourcedata)
 	{
 		double predictingresult = stg.Algorithm(sourcedata);
 		return predictingresult;

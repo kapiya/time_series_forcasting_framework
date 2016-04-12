@@ -7,10 +7,10 @@ import java.util.Calendar;
  * @author Teacher Lee
  *
  */
-public class DateProfile {
+public class DateProfileUtil {
 	public Calendar DATE;
 	public double value;
-	public DateProfile () {
+	public DateProfileUtil () {
 		DATE = null;
 		value = 0;
 	}

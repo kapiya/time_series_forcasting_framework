@@ -10,7 +10,7 @@ import com.edu.jnu.atm.core.strategy.SvmModel;
 import com.edu.jnu.atm.core.strategy.SvmNode;
 import com.edu.jnu.atm.core.strategy.SvmParameter;
 import com.edu.jnu.atm.core.strategy.SvmProblem;
-import com.edu.jnu.atm.util.DateProfile;
+import com.edu.jnu.atm.util.DateProfileUtil;
 
 public class SVMProcess {
 	int SvmInputDate = 6; //模型的输入值个数
@@ -20,7 +20,7 @@ public class SVMProcess {
 	 * @param sourcedata
 	 * @return
 	 */
-	public SvmModel svmtrain(ArrayList<DateProfile> sourcedata) {
+	public SvmModel svmtrain(ArrayList<DateProfileUtil> sourcedata) {
 		int SvmTrainingDate = 23; //训练天数
         SvmNode[][] datas = new SvmNode[SvmTrainingDate][SvmInputDate]; //输入的训练矩阵
         double lables[] = new double[SvmTrainingDate]; //目标输出向量
@@ -54,7 +54,7 @@ public class SVMProcess {
      * TYPE = 0 means DEPOSIT,TYPE = 1 means WITHDRAW,TYPE = 2 means NETVALUE
      * return the true value and the predict result
      */
-	public double svmpredict(SvmModel model, ArrayList<DateProfile> sourcedata) {
+	public double svmpredict(SvmModel model, ArrayList<DateProfileUtil> sourcedata) {
         SvmNode[] vector = new SvmNode[SvmInputDate];
 		for (int i = 0; i < SvmInputDate; i++) {
         	SvmNode node = new SvmNode();

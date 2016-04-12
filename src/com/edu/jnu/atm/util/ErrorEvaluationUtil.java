@@ -6,9 +6,9 @@ import java.util.List;
  * @author Teacher Lee
  *
  */
-public class ErrorEvaluation {	
+public class ErrorEvaluationUtil {	
 	
-	public double computeError (List<Double> sourceList, List<Double> predictList) {	
+	public static double computeError (List<Double> sourceList, List<Double> predictList) {	
 		double ER = 0.3;
 		int n = 0; 	
 		

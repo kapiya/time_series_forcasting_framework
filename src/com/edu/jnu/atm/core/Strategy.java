@@ -3,7 +3,7 @@ package com.edu.jnu.atm.core;
 
 import java.util.ArrayList;
 
-import com.edu.jnu.atm.util.DateProfile;
+import com.edu.jnu.atm.util.DateProfileUtil;
 
 /**
  * ³éÏó²ßÂÔÀà
@@ -11,5 +11,5 @@ import com.edu.jnu.atm.util.DateProfile;
  *
  */
 public abstract class Strategy {
-	public abstract double Algorithm(ArrayList<DateProfile> sourcedata);
+	public abstract double Algorithm(ArrayList<DateProfileUtil> sourcedata);
 }

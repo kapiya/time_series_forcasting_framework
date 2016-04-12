@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import com.edu.jnu.atm.util.DateProfile;
+import com.edu.jnu.atm.util.DateProfileUtil;
 /**
  * 从数据库中取出历史数据组成一个按日期索引的HashMap.
  * @author Teacher Lee
@@ -13,9 +13,9 @@ import com.edu.jnu.atm.util.DateProfile;
 public class SourceDataPool implements java.io.Serializable {	
 	private static final long serialVersionUID = 1L;
 
-	public ArrayList<DateProfile> getSourceDataPool (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS) {	
+	public ArrayList<DateProfileUtil> getSourceDataPool (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS) {	
 		double value = 0;
-		ArrayList<DateProfile> sourcedata = new ArrayList<>();
+		ArrayList<DateProfileUtil> sourcedata = new ArrayList<>();
 		
 		for (int i = 0; i < HISTORY_DAYS; i++) {           
 			TRNS_DATE.add(Calendar.DATE,-1);	
@@ -27,7 +27,7 @@ public class SourceDataPool implements java.io.Serializable {
 
 			dbcon = datafactory.getDBConnection();
 			value = dbcon.getSourceData(DEV_CODE, TRNS_DATE);
-			DateProfile df = new DateProfile();
+			DateProfileUtil df = new DateProfileUtil();
 			df.DATE = TRNS_DATE;
 			df.value = value;
 			sourcedata.add(df);

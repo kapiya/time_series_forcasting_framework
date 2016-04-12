@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * translate String "date" into a Calendar object 
  */
-public class StringToCalendar {	
+public class StringToCalendarUtil {	
 	
 	public Calendar ToCalendar(String date) {		
 		int year = Integer.parseInt(date.substring(0, 4).trim());

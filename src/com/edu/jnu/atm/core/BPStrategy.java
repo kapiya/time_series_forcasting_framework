@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import com.edu.jnu.atm.core.strategy.BP;
-import com.edu.jnu.atm.util.DateProfile;
+import com.edu.jnu.atm.util.DateProfileUtil;
 
 /**
  * 神经网络策略实现预测
@@ -15,7 +15,7 @@ import com.edu.jnu.atm.util.DateProfile;
 public class BPStrategy extends Strategy {
 
 	@Override
-	public double Algorithm (ArrayList<DateProfile> sourcedata) {				
+	public double Algorithm (ArrayList<DateProfileUtil> sourcedata) {				
 		BPProcess bpp = new BPProcess();
 		BP model = bpp.bptrain(sourcedata);
 		double predictresult = bpp.bppredict(model, sourcedata);
