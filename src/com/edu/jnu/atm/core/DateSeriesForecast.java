@@ -2,7 +2,7 @@ package com.edu.jnu.atm.core;
 
 import java.util.Calendar;
 
-import com.edu.jnu.atm.io.ResultDataPool;
+import com.edu.jnu.atm.util.ResultDataPool;
 
 /**
  * 多个日期的预测
@@ -11,7 +11,7 @@ import com.edu.jnu.atm.io.ResultDataPool;
  */
 public class DateSeriesForecast {		
 	ResultDataPool rdp = new ResultDataPool();
-	int HISTORY_DAYS = 30;
+	int HISTORY_DAYS = 30; //历史数据个数
 	
     public ResultDataPool seriesForest(String DEV_CODE, Calendar TRNS_DATE, int Days) {
 		SingleDateForecast SDF = new SingleDateForecast();

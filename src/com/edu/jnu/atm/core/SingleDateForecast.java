@@ -18,32 +18,43 @@ import com.edu.jnu.atm.util.DateProfileUtil;
 public class SingleDateForecast {
 	
 	
-	public double[] forecast (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS ) {	
+	public double[] forecast (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS ) {		
+		double bpForecastResult = 0, svmForecastResult = 0,
+				arimaForecastResult = 0, forecastResult = 0;
+		
 		//历史数据放入源数据池
 		SourceDataPool sdp = new SourceDataPool();
 		ArrayList<DateProfileUtil> sourcedata = sdp.getSourceDataPool(DEV_CODE, TRNS_DATE, HISTORY_DAYS); 
-		TRNS_DATE.add(Calendar.DATE, HISTORY_DAYS);//日期恢复
-		double bpforecastresult = 0, svmforecastresult = 0, forecastresult = 0;
-	/*	ForecastContext forecastcontext0;
-		forecastcontext0 = new ForecastContext (new BPStrategy ());
-	    bpforecastresult = forecastcontext0.forcast(sourcedata);
-	*/	
-	    ForecastContext forecastcontext1;
-		forecastcontext1 = new ForecastContext (new SVMStrategy ());
-	    svmforecastresult = forecastcontext1.forcast(sourcedata);
-    	
-	 //   forecastresult = 0.7 * bpforecastresult + 0.3 * svmforecastresult;	
+				
+		//神经网络模型
+	/*	ForecastContext forecastContext0;
+		forecastContext0 = new ForecastContext (new BPStrategy ());
+	    bpForecastResult = forecastContext0.forcast(sourcedata);
+	*/
+		
+	    //支持向量机模型
+	/*    ForecastContext forecastContext1;
+		forecastContext1 = new ForecastContext (new SVMStrategy ());
+	    svmForecastResult = forecastContext1.forcast(sourcedata);
+    */		    
+	    //ARIMA模型
+	    ForecastContext forecastContext2;
+		forecastContext2 = new ForecastContext (new ArimaStrategy ());
+	    arimaForecastResult = forecastContext2.forcast(sourcedata);
+	    
+	 //   forecastResult = 0.7 * bpForecastResult + 0.3 * svmForecastResult;	
 	  
+	    //得到TRNS_DATE的真实值
 	    SourceData dbcon;
-	    //select the Database: MySQL or Oracle 	 
-		DBFactory datafactory = new MySQLFactory();
-	    //DBFactory datafactory = new OracleFactory();
-
+		DBFactory datafactory = new MySQLFactory(); //MySQL数据库
+	    //DBFactory datafactory = new OracleFactory(); //Oracle数据库
 		dbcon = datafactory.getDBConnection();
 		double realValue = dbcon.getSourceData(DEV_CODE, TRNS_DATE);
+		
+		//结果返回
 		double[] result = new double[2];
 		result[0] = realValue;
-		result[1] = svmforecastresult;
+		result[1] = arimaForecastResult;
 		return result;	
 		
 	}

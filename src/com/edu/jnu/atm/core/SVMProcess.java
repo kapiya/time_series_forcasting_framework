@@ -1,9 +1,6 @@
 package com.edu.jnu.atm.core;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
 
 import com.edu.jnu.atm.core.strategy.Svm;
 import com.edu.jnu.atm.core.strategy.SvmModel;
@@ -21,7 +18,7 @@ public class SVMProcess {
 	 * @return
 	 */
 	public SvmModel svmtrain(ArrayList<DateProfileUtil> sourcedata) {
-		int SvmTrainingDate = 23; //训练天数
+		int SvmTrainingDate = sourcedata.size() - SvmInputDate; //训练天数
         SvmNode[][] datas = new SvmNode[SvmTrainingDate][SvmInputDate]; //输入的训练矩阵
         double lables[] = new double[SvmTrainingDate]; //目标输出向量
         
@@ -32,7 +29,7 @@ public class SVMProcess {
         		node.value = sourcedata.get(i + j).value;
         		datas[i][j] = node;
         	}
-        	lables[i] = sourcedata.get(6 + i).value;
+        	lables[i] = sourcedata.get(SvmInputDate + i).value;
         }
         
         SvmProblem problem = new SvmProblem();

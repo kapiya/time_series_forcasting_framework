@@ -1,5 +1,4 @@
 package com.edu.jnu.atm.core.strategy;
-import java.awt.image.SampleModel;
 import java.io.*;
 import java.util.*;
 //

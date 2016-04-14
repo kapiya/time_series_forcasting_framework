@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import com.edu.jnu.atm.core.DateSeriesForecast;
 import com.edu.jnu.atm.core.SingleDateForecast;
-import com.edu.jnu.atm.io.ResultDataPool;
+import com.edu.jnu.atm.util.ResultDataPool;
 import com.edu.jnu.atm.io.SourceDataPool;
 import com.edu.jnu.atm.util.DateProfileUtil;
 import com.edu.jnu.atm.util.StringToCalendarUtil;
@@ -19,9 +19,9 @@ public class Client {
 	public static void main (String args[]) {			
 		String DEV_CODE = ""; //设备号
 		String TRNS_DATE = "";//预测起始日期(待预测日期的前一天)
-		int dates_of_predict = 400;//预测天数
+		int dates_of_predict = 50;//预测天数
 		
-		try{		
+	/*	try{		
 			System.out.println("Please input the DEV_CODE :");
 			BufferedReader br0 = new BufferedReader(new InputStreamReader(System.in));
 			DEV_CODE = br0.readLine();
@@ -31,8 +31,12 @@ public class Client {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	*/	
 		
-		//转化为日期类
+		DEV_CODE = "990030270001";
+		TRNS_DATE = "20140815";
+		
+		//转化为日期类		
 		StringToCalendarUtil stc = new StringToCalendarUtil();
 		Calendar TRANS_DATE = stc.ToCalendar(TRNS_DATE);
 			

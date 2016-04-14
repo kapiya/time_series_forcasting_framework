@@ -1,4 +1,4 @@
-package com.edu.jnu.atm.io;
+package com.edu.jnu.atm.util;
 
 import java.util.ArrayList;
 

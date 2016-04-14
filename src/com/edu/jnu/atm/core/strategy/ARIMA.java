@@ -592,14 +592,3 @@ public class ARIMA {
   
 }  
   
-  
-class modelandpara  
-{  
-    int[] model;  
-    Vector<double[]> para;  
-    public modelandpara(int[] model,Vector<double[]> para)  
-    {  
-        this.model=model;  
-        this.para=para;  
-    }  
-}  

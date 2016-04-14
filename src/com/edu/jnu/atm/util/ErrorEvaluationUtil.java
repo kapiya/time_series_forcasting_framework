@@ -14,7 +14,7 @@ public class ErrorEvaluationUtil {
 		
     	for (int i = 0; i < sourceList.size(); i ++)           
     	{
-    		if ( (predictList.get(i) + ER * sourceList.get(i) - sourceList.get(i)) > 0 )
+    		if ( Math.abs(predictList.get(i) - sourceList.get(i))/sourceList.get(i) < ER )
     		{
     			n ++;
     		}

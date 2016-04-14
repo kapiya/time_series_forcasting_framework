@@ -2,8 +2,6 @@ package com.edu.jnu.atm.io;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-
 import com.edu.jnu.atm.util.DateProfileUtil;
 /**
  * 从数据库中取出历史数据组成一个按日期索引的HashMap.
@@ -16,9 +14,10 @@ public class SourceDataPool implements java.io.Serializable {
 	public ArrayList<DateProfileUtil> getSourceDataPool (String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS) {	
 		double value = 0;
 		ArrayList<DateProfileUtil> sourcedata = new ArrayList<>();
-		
+		TRNS_DATE.add(Calendar.DATE,-HISTORY_DAYS);	
+
+		//历史数据放入sourcedata
 		for (int i = 0; i < HISTORY_DAYS; i++) {           
-			TRNS_DATE.add(Calendar.DATE,-1);	
 			SourceData dbcon;
 			
 			//select the Database: MySQL or Oracle 	 
@@ -31,6 +30,7 @@ public class SourceDataPool implements java.io.Serializable {
 			df.DATE = TRNS_DATE;
 			df.value = value;
 			sourcedata.add(df);
+			TRNS_DATE.add(Calendar.DATE, 1);	
 
 		}	
 		return sourcedata;				
