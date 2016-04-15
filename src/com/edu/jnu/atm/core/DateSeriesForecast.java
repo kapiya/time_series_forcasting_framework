@@ -13,7 +13,7 @@ import com.edu.jnu.atm.util.ResultDataPool;
  */
 public class DateSeriesForecast {		
 	ResultDataPool rdp = new ResultDataPool();
-	int HISTORY_DAYS = 50; //历史数据个数
+	int HISTORY_DAYS = 60; //历史数据个数
 	
     public ResultDataPool seriesForest(String DEV_CODE, Calendar TRNS_DATE, int Days) {
 		

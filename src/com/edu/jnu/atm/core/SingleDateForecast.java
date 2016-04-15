@@ -28,22 +28,22 @@ public class SingleDateForecast {
 		//神经网络模型
 	//	ForecastContext forecastContext0;
 	//	forecastContext0 = new ForecastContext (new BPStrategy ());
-	//    forecastResult = forecastContext0.forcast(sourcedata);
+	 //   bpForecastResult = forecastContext0.forecast(sourcedata);
 	
 		
 	    //支持向量机模型
-	    ForecastContext forecastContext1;
-		forecastContext1 = new ForecastContext (new SVMStrategy ());
-	    forecastResult = forecastContext1.forcast(sourcedata);
+	//    ForecastContext forecastContext1;
+	//	forecastContext1 = new ForecastContext (new SVMStrategy ());
+	//    svmForecastResult = forecastContext1.forecast(sourcedata);
 	    
 
     		    
 	    //ARIMA模型
-	/*    ForecastContext forecastContext3;
+	    ForecastContext forecastContext3;
 		forecastContext3 = new ForecastContext (new ArimaStrategy ());
-	    ForecastResult = forecastContext3.forecast(sourcedata);
-	 */   
-	 //   forecastResult = 0.7 * bpForecastResult + 0.3 * svmForecastResult;	
+	    arimaForecastResult = forecastContext3.forecast(sourcedata);
+	    
+	  //  forecastResult = 0.8 * bpForecastResult + 0.8 * svmForecastResult;	
 	  
 	    //得到TRNS_DATE的真实值
 	    SourceData dbcon;
@@ -55,7 +55,7 @@ public class SingleDateForecast {
 		//结果返回
 		double[] result = new double[2];
 		result[0] = realValue;
-		result[1] = forecastResult;
+		result[1] = arimaForecastResult;
 		return result;	
 		
 	}

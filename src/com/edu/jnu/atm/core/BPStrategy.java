@@ -20,7 +20,7 @@ public class BPStrategy extends Strategy {
 	@Override
 	public double Algorithm (ArrayList<DateProfileUtil> sourcedata) {	
 		int inputDate = 6; //神经网络输入层个数
-		int trainingDate = 24; //训练天数
+		int trainingDate = 40; //训练天数
 		double[] predictresult; //预测结果
 		
 		//BP神经网络的构建与初始化,各层的神经元个数分别为：inputDate，3，1	

@@ -14,7 +14,7 @@ public class OracleData extends SourceData {
 	 * DEV_CODE,TRANS_DATE as input, value of the source data as output
 	 */
 	@Override
-	public double getSourceData (String DEV_CODE, Calendar TRANS_DATE) {
+	public double getSourceData (String DEV_CODE, Calendar TRANS_DATE, DBConnectionPool connPool) {
 		
 		double SqlResult = 0;
 		

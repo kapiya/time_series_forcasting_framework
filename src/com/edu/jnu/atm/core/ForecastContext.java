@@ -15,7 +15,7 @@ public class ForecastContext {
 		this.stg =stg;
 	}
 	
-	public double forcast (ArrayList<DateProfileUtil> sourcedata)
+	public double forecast (ArrayList<DateProfileUtil> sourcedata)
 	{
 		double predictingresult = stg.Algorithm(sourcedata);
 		return predictingresult;
