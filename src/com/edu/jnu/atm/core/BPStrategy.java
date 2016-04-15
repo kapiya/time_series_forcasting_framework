@@ -20,11 +20,11 @@ public class BPStrategy extends Strategy {
 	@Override
 	public double Algorithm (ArrayList<DateProfileUtil> sourcedata) {	
 		int inputDate = 6; //神经网络输入层个数
-		int trainingDate = sourcedata.size() - inputDate; //训练天数
+		int trainingDate = 24; //训练天数
 		double[] predictresult; //预测结果
 		
 		//BP神经网络的构建与初始化,各层的神经元个数分别为：inputDate，3，1	
-		int[] neuronsInLayers = {inputDate,3,1};
+		int[] neuronsInLayers = {inputDate,3,2,1};
 		NeuralNetwork<BackPropagation> neuralNetwork = new MultiLayerPerceptron(neuronsInLayers);
 		WeightsRandomizer WR = new WeightsRandomizer();
 		WR.randomize(neuralNetwork);
@@ -35,10 +35,10 @@ public class BPStrategy extends Strategy {
 			double[] data = new double[inputDate]; //训练输入数组
 			double[] label = new double[1]; //训练输出数组
         	for (int j = 0; j < inputDate; j++) {
-        		double value = sourcedata.get(i + j).value;
+        		double value = sourcedata.get(sourcedata.size()-(inputDate + 1 + i) + j).value;
         		data[j] = value;
         	}
-        	label[0] = sourcedata.get(inputDate + i).value;
+        	label[0] = sourcedata.get(sourcedata.size()-(inputDate + 1 + i) + inputDate).value;
     		trainingSet.addRow(data, label);
         }
 		

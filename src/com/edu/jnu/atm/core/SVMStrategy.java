@@ -13,10 +13,11 @@ public class SVMStrategy extends Strategy {
 		SVMProcess svmp = new SVMProcess();
 		
 		//select week model or date model 
-		SvmModel model = svmp.svmtrain(sourcedata);
-		predictresult = svmp.svmpredict(model, sourcedata);
-	//	SvmModel model = svmp.svmtrain(DEV_CODE, TRNS_DATE);
-	//	predictresult = svmp.svmpredict(model, DEV_CODE, TRNS_DATE);
+	//	SvmModel datemodel = svmp.svmtrain(sourcedata);
+	//	predictresult = svmp.svmpredict(datemodel, sourcedata);
+		
+		SvmModel weekmodel = svmp.svmtrain(sourcedata, 6);
+		predictresult = svmp.svmpredict(weekmodel, sourcedata);
 	
 		return predictresult;	
 	}

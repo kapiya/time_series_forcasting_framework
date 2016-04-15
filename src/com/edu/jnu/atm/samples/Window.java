@@ -25,6 +25,11 @@ import org.jfree.ui.RectangleInsets;
 import com.edu.jnu.atm.util.ResultDataPool;
 import com.edu.jnu.atm.util.ErrorEvaluationUtil;
 
+/**
+ * 结果的窗口图形展示类，把预测值和真实值的对比用曲线图表示出来
+ * @author Teacher Lee
+ *
+ */
 public class Window {
 	
 	
@@ -33,8 +38,10 @@ public class Window {
 	 * RATE denotes error ratio
 	 */
 	public void show (ResultDataPool RDP) {
+		
 		double RATE;//预测误差率		
 		RATE = ErrorEvaluationUtil.computeError(RDP.sourceList, RDP.predictList);
+		
 		JFrame frame = new JFrame();
 		int width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int height = Toolkit.getDefaultToolkit().getScreenSize().height; 
@@ -80,6 +87,12 @@ public class Window {
 		
     }
     
+	/**
+	 * 数据集构建
+	 * @param sourceData
+	 * @param predictData
+	 * @return
+	 */
      private DefaultCategoryDataset createDataset (List<Double> sourceData, List<Double> predictData) { 
            
     	 DefaultCategoryDataset lineseries = new DefaultCategoryDataset();
@@ -91,6 +104,7 @@ public class Window {
             	    lineseries.addValue(predictData.get(i),title2, String.valueOf(i));
             }
             return lineseries;
+            
      }
 
 
