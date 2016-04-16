@@ -16,14 +16,16 @@ public class ArimaStrategy extends Strategy {
 	@Override
 	public double Algorithm(ArrayList<DateProfileUtil> sourcedata) {
 		double result;
-		double[] input = new double[30]; // 输入数据数组
-		for (int i = 0; i < 30; i++) {
-			input[i] = sourcedata.get(sourcedata.size() - (i + 1)).value;
+		int DATE_NUMBER = 30;
+		double[] input = new double[DATE_NUMBER]; // 输入数据数组
+		for (int i = DATE_NUMBER; i > 0; i--) {
+			input[DATE_NUMBER-i] = sourcedata.get(sourcedata.size() - i).value;
 		}
 
 		ARIMA arima = new ARIMA(input);
 		int[] model = arima.getARIMAmodel();
 		result = arima.aftDeal(arima.forecast(model[0], model[1]));
+		
 		return result;
 	}
 

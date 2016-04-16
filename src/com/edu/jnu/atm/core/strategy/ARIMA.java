@@ -11,6 +11,7 @@ import java.util.*;
 public class ARIMA {
 	double[] originalData;
 	ARMAMath armamath = new ARMAMath();
+	int PEROID = 7;// seasonal Difference:Peroid=4
 
 	Vector<double[]> armaARMAcoe = new Vector<double[]>();
 	Vector<double[]> bestarmaARMAcoe = new Vector<double[]>();
@@ -26,12 +27,11 @@ public class ARIMA {
 	 */
 	double stderrDara = 0;
 	double avgsumData = 0;
-
+	double[] tempData;
 	public double[] preDealDif() {
-		// seasonal Difference:Peroid=7
-		double[] tempData = new double[originalData.length - 4];
-		for (int i = 0; i < originalData.length - 4; i++) {
-			tempData[i] = originalData[i + 4] - originalData[i];
+		tempData = new double[originalData.length - PEROID];
+		for (int i = 0; i < originalData.length - PEROID; i++) {
+			tempData[i] = originalData[i + PEROID] - originalData[i];
 		}
 		// Z-Score
 		avgsumData = armamath.avgData(tempData);
@@ -175,8 +175,27 @@ public class ARIMA {
 	 * @param predictValue
 	 * @return
 	 */
-	public int aftDeal(int predictValue) {
-		return (int) (predictValue * stderrDara + avgsumData + originalData[originalData.length - 4]);
+	public double aftDeal(double predictValue) {
+		double outPut; 
+		double min = Integer.MAX_VALUE;
+		double max = Integer.MIN_VALUE;
+		outPut = predictValue * stderrDara + avgsumData + originalData[originalData.length - PEROID];
+
+		//过去2个数据中的最大值和最小值
+		for (int i = originalData.length - 1; i > originalData.length - 3; i--) {
+			if (originalData[i] > max)
+				max = originalData[i];
+		    if (originalData[i] < min)
+				min = originalData[i];
+		}
+		
+		//结果约束
+		if (outPut > max)
+			outPut = (int)max;
+		else if (outPut < min)
+			outPut = (int)min;
+		
+		return outPut;
 	}
 
 	/**
@@ -186,8 +205,8 @@ public class ARIMA {
 	 * @param q
 	 * @return
 	 */
-	public int forecast(int p, int q) {
-		int predictValue = 0;
+	public double forecast(int p, int q) {
+		double predictValue = 0;
 		double[] stdoriginalData = this.preDealDif();
 		int n = stdoriginalData.length;
 		double temp = 0, temp2 = 0;
@@ -207,7 +226,7 @@ public class ARIMA {
 					err[j] = err[j - 1];
 				}
 				if (k == n)
-					predictValue = (int) (err[0] - temp); // 产生预测
+					predictValue = err[0] - temp; // 产生预测
 				else
 					err[0] = stdoriginalData[k] - (err[0] - temp);
 			}
@@ -217,14 +236,16 @@ public class ARIMA {
 			double[] arPara = bestarmaARMAcoe.get(0);
 			for (int k = p - 1; k <= n; k++) {
 				temp = 0;
+				double s;
 				for (int i = 0; i < p - 1; i++) {
 					temp += arPara[i] * stdoriginalData[k - i - 1];
 				}
-				temp += Math.sqrt(arPara[p - 1]);
+				s = Math.sqrt(arPara[p - 1]);
+				temp = temp + (int)s;
 			}
-			predictValue = (int) temp;
+			predictValue = temp;
+			
 		} else {
-
 			double[] arPara = bestarmaARMAcoe.get(0);
 			double[] maPara = bestarmaARMAcoe.get(1);
 
@@ -246,7 +267,7 @@ public class ARIMA {
 					err[j] = err[j - 1];
 				}
 				if (k == n)
-					predictValue = (int) (err[0] - temp2 + temp);
+					predictValue = err[0] - temp2 + temp;
 				else
 					err[0] = stdoriginalData[k] - (err[0] - temp2 + temp);
 

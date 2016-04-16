@@ -7,7 +7,7 @@ import java.util.Calendar;
  */
 public class StringToCalendarUtil {
 
-	public Calendar ToCalendar(String date) {
+	public static Calendar ToCalendar(String date) {
 		int year = Integer.parseInt(date.substring(0, 4).trim());
 		int month = Integer.parseInt(date.substring(4, 6).trim());
 		int day = Integer.parseInt(date.substring(6, 8).trim());

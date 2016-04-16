@@ -1,7 +1,5 @@
 package com.edu.jnu.atm.util;
 
-import java.util.Calendar;
-
 /**
  * ÈÕÆÚ»­Ïñ
  * 
@@ -9,11 +7,11 @@ import java.util.Calendar;
  *
  */
 public class DateProfileUtil {
-	public Calendar DATE;
+	public String DATE;
 	public double value;
 
 	public DateProfileUtil() {
-		DATE = null;
+		DATE = "";
 		value = 0;
 	}
 }

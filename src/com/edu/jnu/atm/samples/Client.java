@@ -16,15 +16,14 @@ public class Client {
 	public static void main(String args[]) {
 		String DEV_CODE = ""; // 设备号
 		String TRNS_DATE = "";// 预测起始日期(待预测日期的前一天)
-		int dates_of_predict = 400;// 预测天数
+		int dates_of_predict = 800;// 预测天数
 
 		// 用户输入参数
 		DEV_CODE = "990030270001";
 		TRNS_DATE = "20130515";
 
 		// 转化为日期类
-		StringToCalendarUtil stc = new StringToCalendarUtil();
-		Calendar TRANS_DATE = stc.ToCalendar(TRNS_DATE);
+		Calendar TRANS_DATE = StringToCalendarUtil.ToCalendar(TRNS_DATE);
 
 		// 预测
 		DateSeriesForecast DSF = new DateSeriesForecast();
