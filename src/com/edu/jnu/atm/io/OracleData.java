@@ -8,19 +8,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class OracleData extends SourceData {
-	
-	
+
 	/**
 	 * DEV_CODE,TRANS_DATE as input, value of the source data as output
 	 */
 	@Override
-	public double getSourceData (String DEV_CODE, Calendar TRANS_DATE, DBConnectionPool connPool) {
-		
+	public double getSourceData(String DEV_CODE, Calendar TRANS_DATE, DBConnectionPool connPool) {
+
 		double SqlResult = 0;
-		
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyyMMdd");			
+
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyyMMdd");
 		String TRNS_DATE = dateformat.format(TRANS_DATE.getTime());
-		
+
 		Connection con = null;
 		PreparedStatement pre = null;
 		ResultSet result = null;
@@ -30,17 +29,16 @@ public class OracleData extends SourceData {
 			String url = "jdbc:oracle:thin:@localhost:1521:ATM";
 			String user = "jimmy";
 			String password = "jimmy";
-			con = DriverManager.getConnection(url,user,password);
+			con = DriverManager.getConnection(url, user, password);
 			pre = con.prepareStatement(sql);
 			result = pre.executeQuery();
-			while (result.next()) { 
+			while (result.next()) {
 				SqlResult = result.getDouble(1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error while interact with Database!");
-		}
-		finally {
+		} finally {
 			try {
 				if (result != null)
 					result.close();
@@ -51,9 +49,8 @@ public class OracleData extends SourceData {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 		return SqlResult;
-	}	
-	
-	
+	}
+
 }
