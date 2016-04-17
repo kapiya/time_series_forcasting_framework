@@ -16,7 +16,7 @@ public class Client {
 	public static void main(String args[]) {
 		String DEV_CODE = ""; // 设备号
 		String TRNS_DATE = "";// 预测起始日期(待预测日期的前一天)
-		int dates_of_predict = 800;// 预测天数
+		int dates_of_predict = 200;// 预测天数
 
 		// 用户输入参数
 		DEV_CODE = "990030270001";

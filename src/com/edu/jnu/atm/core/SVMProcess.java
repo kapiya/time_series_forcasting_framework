@@ -14,7 +14,7 @@ import com.edu.jnu.atm.util.DateProfileUtil;
 
 public class SVMProcess {
 	int SvmInputDate = 6; // 模型的输入值个数
-	int SvmTrainingDate = 7; // 训练天数
+	int SvmTrainingDate = 5; // 训练天数
 	MaxMinNormalizer DSN = new MaxMinNormalizer();
 
 	/**
