@@ -1,12 +1,16 @@
 package com.edu.jnu.atm.io;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * ¶ÁÈ¡MySQLÊý¾Ý
+ * @author Teacher Lee
+ *
+ */
 public class MySQLData extends SourceData {
 
 	/**
@@ -20,19 +24,11 @@ public class MySQLData extends SourceData {
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyyMMdd");
 		String TRNS_DATE = dateformat.format(TRANS_DATE.getTime());
 
-		// Connection con = null;
 		ResultSet result = null;
 		String sql = "SELECT WITHDRAW FROM guangfa WHERE TRNS_DATE = " + TRNS_DATE;
 		Statement pre = null;
 		try {
-			// Class.forName("com.mysql.jdbc.Driver");
-			// String url =
-			// "jdbc:mysql://localhost:3306/ATM?autoReconnect=true&useSSL=false";
-			// String user = "root";
-			// String password = "administrator";
-			// con = DriverManager.getConnection(url,user,password);
 			Connection con = connPool.getConnection();
-
 			pre = con.createStatement();
 			result = pre.executeQuery(sql);
 			while (result.next()) {
@@ -43,14 +39,6 @@ public class MySQLData extends SourceData {
 			e.printStackTrace();
 			System.out.println("Error while interact with Database!");
 		}
-		// finally
-		// {
-		/*
-		 * try { if (result != null) result.close(); if (pre != null)
-		 * pre.close(); if (con != null) con.close(); } catch (Exception e) {
-		 * e.printStackTrace(); }
-		 */
-		// }
 		return SqlResult;
 	}
 
