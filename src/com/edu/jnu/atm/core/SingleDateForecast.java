@@ -17,7 +17,8 @@ import com.edu.jnu.atm.util.DateProfileUtil;
  */
 public class SingleDateForecast {
 
-	public double[] forecast(String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS, DBConnectionPool connPool, int TYPE) {
+	public double[] forecast(String DEV_CODE, Calendar TRNS_DATE, int HISTORY_DAYS, DBConnectionPool connPool,
+			int TYPE) {
 		double forecastResult = 0;
 
 		// 历史数据放入源数据池
@@ -25,18 +26,18 @@ public class SingleDateForecast {
 		ArrayList<DateProfileUtil> sourcedata = sdp.getSourceDataPool(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool);
 
 		switch (TYPE) {
-		case 1: 
+		case 1:
 			// 神经网络模型
-			 ForecastContext forecastContext0;
-		     forecastContext0 = new ForecastContext (new BPStrategy ());
-			 forecastResult = forecastContext0.forecast(sourcedata);
-			 break;
+			ForecastContext forecastContext0;
+			forecastContext0 = new ForecastContext(new BPStrategy());
+			forecastResult = forecastContext0.forecast(sourcedata);
+			break;
 		case 2:
 			// 支持向量机模型
-			 ForecastContext forecastContext1;
-			 forecastContext1 = new ForecastContext (new SVMStrategy ());
-			 forecastResult = forecastContext1.forecast(sourcedata);
-			 break;
+			ForecastContext forecastContext1;
+			forecastContext1 = new ForecastContext(new SVMStrategy());
+			forecastResult = forecastContext1.forecast(sourcedata);
+			break;
 		case 3:
 			// ARIMA模型
 			ForecastContext forecastContext2;
@@ -44,13 +45,13 @@ public class SingleDateForecast {
 			forecastResult = forecastContext2.forecast(sourcedata);
 			break;
 		case 4:
-			//数学统计方法模型
+			// 数学统计方法模型
 			ForecastContext forecastContext3;
 			forecastContext3 = new ForecastContext(new StatisticStrategy());
-			forecastResult = forecastContext3.forecast(sourcedata);		
+			forecastResult = forecastContext3.forecast(sourcedata);
 			break;
 		}
-	
+
 		// 得到TRNS_DATE的真实值
 		SourceData dbcon;
 		DBFactory datafactory = new MySQLFactory(); // MySQL数据库

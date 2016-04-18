@@ -11,11 +11,11 @@ import java.util.List;
 public class ErrorEvaluationUtil {
 
 	public static double computeError(List<Double> sourceList, List<Double> predictList) {
-		double ER = 0.3;
+	//	double ER = 0.3;
 		int n = 0;
 
 		for (int i = 0; i < sourceList.size(); i++) {
-			if (Math.abs(predictList.get(i) - sourceList.get(i)) / sourceList.get(i) < ER) {
+			if ((predictList.get(i) - sourceList.get(i)) > 0) {
 				n++;
 			}
 		}

@@ -29,28 +29,27 @@ public class DateSeriesForecast {
 
 		// 逐个日期预测
 		SingleDateForecast SDF = new SingleDateForecast();
-		
-		//预测的第一天
+
+		// 预测的第一天
 		double[] result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
 		rdp.sourceList.add(result[0]);
 		rdp.predictList.add(result[1]);
 		TRNS_DATE.add(Calendar.DATE, 1);
-		
-		
+
 		for (int i = 1; i < Days; i++) {
 			result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
-			
-			//预测值增强学习调整过程
-			if ((rdp.predictList.get(i - 1) < rdp.sourceList.get(i - 1)) && (result[1] > rdp.predictList.get(i - 1)))
-				result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 3);
+			double[] result0 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 4);
+			double[] result1 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 2);
+			// 预测值增强学习调整过程
+			if ((result[1] < result0[1]))
+				result = result0;
 
+			result[1] += 0.5 * result1[1];
 			rdp.sourceList.add(result[0]);
 			rdp.predictList.add(result[1]);
 			TRNS_DATE.add(Calendar.DATE, 1);
 		}
-		
-		
-		
+
 		// 释放数据库连接
 		try {
 			connPool.closeConnectionPool();
