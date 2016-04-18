@@ -1,18 +1,9 @@
 package com.edu.jnu.atm.io;
 
-//
-//    一个效果非常不错的JAVA数据库连接池.
-//    from:http://www.jxer.com/home/?uid-195-action-viewspace-itemid-332
-//    虽然现在用APACHE COMMONS DBCP可以非常方便的建立数据库连接池，
-//    但是像这篇文章把数据库连接池的内部原理写的这么透彻，注视这么完整，
-//    真是非常难得，让开发人员可以更深层次的理解数据库连接池，真是非常感
-//    谢这篇文章的作者。
-//
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Enumeration;
@@ -26,10 +17,12 @@ public class DBConnectionPool {
 	private String dbPassword = ""; // 数据库用户密码
 	private String testTable = ""; // 测试连接是否可用的测试表名，默认没有测试表
 	private int initialConnections = 10; // 连接池的初始大小
-	private int incrementalConnections = 5; // 连接池自动增加的大小
+	private int incrementalConnections = 10; // 连接池自动增加的大小
 	private int maxConnections = 50; // 连接池最大的大小
-	private Vector connections = null; // 存放连接池中数据库连接的向量 , 初始时为 null
-	// 它中存放的对象为 PooledConnection 型
+	private Vector<PooledConnection> connections = null; // 存放连接池中数据库连接的向量 ,
+															// 初始时为 null，存放的对象为
+															// PooledConnection
+															// 型
 
 	public DBConnectionPool(String jdbcDriver, String dbUrl, String dbUsername, String dbPassword) {
 
@@ -81,7 +74,7 @@ public class DBConnectionPool {
 		Driver driver = (Driver) (Class.forName(this.jdbcDriver).newInstance());
 		DriverManager.registerDriver(driver); // 注册 JDBC 驱动程序
 		// 创建保存连接的向量 , 初始时有 0 个元素
-		connections = new Vector();
+		connections = new Vector<PooledConnection>();
 		// 根据 initialConnections 中设置的值，创建连接。
 		createConnections(this.initialConnections);
 	}
@@ -161,11 +154,12 @@ public class DBConnectionPool {
 		return conn;
 	}
 
+	@SuppressWarnings("resource")
 	private Connection findFreeConnection() throws SQLException {
 		Connection conn = null;
 		PooledConnection pConn = null;
 		// 获得连接池向量中所有的对象
-		Enumeration enumerate = connections.elements();
+		Enumeration<PooledConnection> enumerate = connections.elements();
 		// 遍历所有的对象，看是否有可用的连接
 		while (enumerate.hasMoreElements()) {
 			pConn = (PooledConnection) enumerate.nextElement();
@@ -220,7 +214,7 @@ public class DBConnectionPool {
 			return;
 		}
 		PooledConnection pConn = null;
-		Enumeration enumerate = connections.elements();
+		Enumeration<PooledConnection> enumerate = connections.elements();
 		// 遍历连接池中的所有连接，找到这个要返回的连接对象
 		while (enumerate.hasMoreElements()) {
 			pConn = (PooledConnection) enumerate.nextElement();
@@ -240,7 +234,7 @@ public class DBConnectionPool {
 			return;
 		}
 		PooledConnection pConn = null;
-		Enumeration enumerate = connections.elements();
+		Enumeration<PooledConnection> enumerate = connections.elements();
 		while (enumerate.hasMoreElements()) {
 			// 获得一个连接对象
 			pConn = (PooledConnection) enumerate.nextElement();
@@ -262,7 +256,7 @@ public class DBConnectionPool {
 			return;
 		}
 		PooledConnection pConn = null;
-		Enumeration enumerate = connections.elements();
+		Enumeration<PooledConnection> enumerate = connections.elements();
 		while (enumerate.hasMoreElements()) {
 			pConn = (PooledConnection) enumerate.nextElement();
 			// 假如忙，等 5 秒

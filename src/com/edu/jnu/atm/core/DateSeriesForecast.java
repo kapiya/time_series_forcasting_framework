@@ -30,7 +30,7 @@ public class DateSeriesForecast {
 		// 逐个日期预测
 		SingleDateForecast SDF = new SingleDateForecast();
 
-		// 预测的第一天
+		// 初始化过程，预测的第一天
 		double[] result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
 		rdp.sourceList.add(result[0]);
 		rdp.predictList.add(result[1]);
@@ -40,6 +40,7 @@ public class DateSeriesForecast {
 			result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
 			double[] result0 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 4);
 			double[] result1 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 2);
+
 			// 预测值增强学习调整过程
 			if ((result[1] < result0[1]))
 				result = result0;
