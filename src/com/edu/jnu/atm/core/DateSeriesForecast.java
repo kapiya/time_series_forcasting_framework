@@ -32,20 +32,23 @@ public class DateSeriesForecast {
 
 		// 初始化过程，预测的第一天
 		double[] result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
+		result[1] += 0.3 * result[1];
 		rdp.sourceList.add(result[0]);
 		rdp.predictList.add(result[1]);
 		TRNS_DATE.add(Calendar.DATE, 1);
+		
 
 		for (int i = 1; i < Days; i++) {
-			result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 1);
+			result = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool,1);
 			double[] result0 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 4);
 			double[] result1 = SDF.forecast(DEV_CODE, TRNS_DATE, HISTORY_DAYS, connPool, 2);
 
 			// 预测值增强学习调整过程
 			if ((result[1] < result0[1]))
 				result = result0;
-
-			result[1] += 0.5 * result1[1];
+			
+			result[1] += 0.6 * result1[1];
+			
 			rdp.sourceList.add(result[0]);
 			rdp.predictList.add(result[1]);
 			TRNS_DATE.add(Calendar.DATE, 1);

@@ -26,6 +26,8 @@ public class MySQLData extends SourceData {
 
 		ResultSet result = null;
 		String sql = "SELECT WITHDRAW FROM guangfa WHERE TRNS_DATE = " + TRNS_DATE;
+		//String sql = "SELECT WITHDRAW FROM ATM WHERE DEV_CODE = " + DEV_CODE + " AND TRNS_DATE = " + TRNS_DATE;
+
 		Statement pre = null;
 		try {
 			Connection con = connPool.getConnection();

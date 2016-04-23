@@ -51,7 +51,7 @@ public class Window {
 		String r = String.valueOf(RATE);
 		text.setEditable(false);
 		text.setFont(new Font("宋体", Font.BOLD, 20));
-		text.setText("预测准确度为：" + r);
+		//text.setText("预测准确度为：" + r);
 		panel.add(text);
 		ChartPanel tsc = LineChart(RDP.sourceList, RDP.predictList);
 		frame.add(tsc, BorderLayout.CENTER);

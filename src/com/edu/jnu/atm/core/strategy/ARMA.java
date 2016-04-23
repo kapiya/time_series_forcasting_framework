@@ -20,7 +20,7 @@ public class ARMA {
 	 * 
 	 * @param stdoriginalData
 	 * @param p,q
-	 *            //p,q为MA模型阶数
+	 *p,q为MA模型阶数
 	 */
 	public ARMA(double[] stdoriginalData, int p, int q) {
 		this.stdoriginalData = stdoriginalData;
