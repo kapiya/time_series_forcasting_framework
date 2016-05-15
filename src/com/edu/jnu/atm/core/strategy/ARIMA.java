@@ -78,7 +78,9 @@ public class ARIMA {
 				bestarmaARMAcoe = armaARMAcoe;
 			}
 		}
+	//	System.out.println(model[bestModelindex][0]+ " " + model[bestModelindex][1]+" " +minAIC);
 		return model[bestModelindex];
+		
 	}
 
 	/**

@@ -61,6 +61,13 @@ public class DateSeriesForecast {
 			e.printStackTrace();
 		}
 
+	/*	double[] source = new double[rdp.sourceList.size()]; 
+		double[] predict = new double[rdp.sourceList.size()];
+		for (int i = 0; i < rdp.sourceList.size(); i++) {
+			source[i] = rdp.sourceList.get(i);
+			predict[i] = rdp.predictList.get(i);
+		}
+	*/	
 		return rdp;
 
 	}

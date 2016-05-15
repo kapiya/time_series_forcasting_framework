@@ -7,6 +7,7 @@ import com.edu.jnu.atm.io.DBFactory;
 import com.edu.jnu.atm.io.MySQLFactory;
 import com.edu.jnu.atm.io.SourceData;
 import com.edu.jnu.atm.io.SourceDataPool;
+import com.edu.jnu.atm.util.CalendarToStringUtil;
 import com.edu.jnu.atm.util.DateProfileUtil;
 
 /**
@@ -63,6 +64,8 @@ public class SingleDateForecast {
 		double[] result = new double[2];
 		result[0] = realValue;
 		result[1] = forecastResult;
+		String s = CalendarToStringUtil.toString(TRNS_DATE);
+		System.out.println(s + " " + result[0] + " " + result[1] );
 		return result;
 
 	}
